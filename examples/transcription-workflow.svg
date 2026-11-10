@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="464" viewBox="0 0 1000 464" role="img" aria-labelledby="title desc">
+  <title id="title">Transcribe Media workflow</title>
+  <desc id="desc">Decode the audio track, then review the original transcript. If speech is unclear or undetected and there is loud steady noise, retry that section with DeepFilterNet3 and compare the readings. Otherwise, return the original result.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L8 4 L0 8 Z" fill="#7ba2c2"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="998" height="462" rx="25" fill="#101b2b" stroke="#30445a" stroke-width="2"/>
+  <g font-family="system-ui, -apple-system, sans-serif">
+    <text x="42" y="49" fill="#8ae0c4" font-size="13" font-weight="700" letter-spacing="2">AGENT SKILL · LOCAL AUDIO</text>
+    <text x="42" y="93" fill="#f3f7fb" font-size="36" font-weight="700">Transcribe Media</text>
+    <text x="42" y="124" fill="#b4c8db" font-size="17">Start with the original recording. Filter only when the first review needs it.</text>
+    <g fill="none" stroke="#7ba2c2" stroke-width="2" marker-end="url(#arrow)">
+      <path d="M290 215 H335"/>
+      <path d="M600 215 H645"/>
+      <path d="M731 271 V301 H274 V335"/>
+      <path d="M879 271 V335"/>
+    </g>
+    <g fill="#192a3e" stroke="#405c77">
+      <rect x="42" y="160" width="248" height="110" rx="13"/>
+      <rect x="337" y="160" width="263" height="110" rx="13"/>
+      <rect x="647" y="160" width="311" height="110" rx="13"/>
+      <rect x="42" y="336" width="450" height="87" rx="13"/>
+    </g>
+    <rect x="508" y="336" width="450" height="87" rx="13" fill="#153833" stroke="#46947f"/>
+    <g fill="#8ae0c4" font-size="12" font-weight="700" letter-spacing="1">
+      <text x="60" y="189">01 · INPUT</text>
+      <text x="355" y="189">02 · FIRST PASS</text>
+      <text x="665" y="189">03 · RETRY CHECK</text>
+    </g>
+    <g fill="#f3f7fb" font-size="19" font-weight="700">
+      <text x="60" y="219">Read the audio track</text>
+      <text x="355" y="219">Review the transcript</text>
+      <text x="665" y="219">Unclear speech + steady noise?</text>
+      <text x="61" y="371">Return the original result</text>
+      <text x="527" y="371">Retry the section with DeepFilterNet3</text>
+    </g>
+    <g fill="#b4c8db" font-size="14">
+      <text x="60" y="246">Local audio or video file</text>
+      <text x="355" y="246">Whisper Base, with Small checks</text>
+      <text x="665" y="246">Noise must also be loud</text>
+      <text x="61" y="398">Timestamps and replay clips for unclear sections</text>
+      <text x="527" y="398">Compare both readings and flag wording changes</text>
+    </g>
+    <g fill="#d5e6f4" font-size="13" font-weight="700">
+      <text x="294" y="321">NO</text>
+      <text x="891" y="312">YES</text>
+    </g>
+  </g>
+</svg>

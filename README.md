@@ -17,6 +17,18 @@ In the [five-second sample](examples/speech-and-motion.mov), the spoken line sta
 3. **Inspect the video.** It measures motion and visual changes from the video frames. If you ask what is on screen, it exports timestamped stills so your agent can inspect objects, interface changes, or visible text.
 4. **Line up speech and motion.** It accounts for different audio and video start times and maps speech across known audio gaps. When a cue spans a timestamp issue, the timeline can mark its timing as approximate.
 
+### What happens when speech is unclear?
+
+Video Analysis bundles the audio tools from **Transcribe Media**. They read the audio track from either an audio file or a video file and start with the original recording.
+
+![Transcribe Media workflow showing the original audio pass, Whisper review, and optional noise-reduction retry.](examples/transcription-workflow.svg)
+
+- **Whisper review.** The default starts with Whisper Base. Whisper Small checks short recordings up to 15 seconds and low-confidence passages in longer ones. Disagreements can appear as `[unclear]`.
+- **Targeted noise reduction.** With DeepFilterNet3 installed, the audio tool can retry unclear passages or transcript gaps when it detects loud, steady noise. It tries a short window first and can widen it if needed. Clear lines keep their wording and timestamps.
+- **Compare and replay.** A `[changed by denoise]` entry shows where the original and filtered readings differ. When available, replay clips let you hear both versions. Treat the readings as candidates, especially when the main transcript is still unclear.
+
+In Transcribe Media’s original one-Mac test, the noisy 17-word sample produced **4 word errors with filtering** and **12 with filtering disabled** in Whisper Small’s candidate readings. The main transcript still marked the passage unclear in both runs. The clean sample had zero errors in both runs. This was a small synthetic-noise test, and results depend on the recording.
+
 ### Try asking
 
 - **Audio:** “Summarize this podcast from its audio and give me timestamps for the main points.”
@@ -45,6 +57,17 @@ Public links must be downloadable. For sign-in or protected media, use an access
 | `motion.json` | Motion measurements for the full frame and its regions. |
 | `subtitles.srt` and `subtitles.vtt` | Captions on the original source clock. |
 | `frame-*.png` | Still frames exported on request. |
+
+### More audio controls
+
+The bundled speech tools offer a few options beyond the combined video command. Run these from the skill folder with a local audio or video file.
+
+| Task | How to use it |
+| --- | --- |
+| Save short WAV excerpts | Run `uv run --script scripts/speech/transcribe.py --excerpts-dir ./replay -- "/path/to/recording.mp4"`. Use a fresh replay folder. |
+| Compare with and without noise reduction | Pass `--denoise` to force a full-recording retry, or `--no-denoise` to use the original audio. See the [DeepFilterNet3 setup](references/speech.md#background-noise-reduction). |
+| Estimate who spoke when | Use `--speakers` or `--speaker-count N` after the [speaker model setup](references/speech.md#speaker-labels). Speaker labels are estimates within one recording. The tool can flag overlapping speech. |
+| Measure pitch | Use the [pitch helper](references/speech.md#voice-analysis) on a section with one speaker. It reports median pitch, the middle 80% range, and how much of the section yielded a pitch estimate. |
 
 ## How do I install it?
 
