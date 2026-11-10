@@ -13,7 +13,7 @@ In the [five-second sample](examples/speech-and-motion.mov), the spoken line sta
 ## How does it work?
 
 1. **Open the recording.** The skill reads a local file or downloads a supported public link. If you ask for a time range, it analyzes that section and keeps the original timestamps.
-2. **Listen to the audio.** It transcribes speech directly from the recording, so YouTube captions are optional. It keeps the original language, marks unclear passages when detected, and can search for a spoken phrase or export subtitles.
+2. **Listen to the audio.** It transcribes speech directly from the recording, including videos without published captions. It keeps the original language, marks unclear passages when detected, and can search for a spoken phrase or export subtitles.
 3. **Inspect the video.** It measures motion and visual changes from the video frames. If you ask what is on screen, it exports timestamped stills so your agent can inspect objects, interface changes, or visible text.
 4. **Line up speech and motion.** It accounts for different audio and video start times and maps speech across known audio gaps. When a cue spans a timestamp issue, the timeline can mark its timing as approximate.
 
