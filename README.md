@@ -10,7 +10,7 @@ Use it to summarize a podcast from its audio, jump to a phrase in an interview, 
 
 [![Animated demo showing the spoken cue and the red cube changing position on the same timeline.](examples/video-analysis-demo.gif)](examples/video-analysis-demo.mp4)
 
-[Watch the demo with sound](examples/video-analysis-demo.mp4). The preview above is silent. Watch the playhead cross **0:02** as the highlighted frame switches from the cube on the left to the cube on the right, during the spoken line. Video Analysis transcribed the demo audio and detected the frame change. The scene uses generated imagery.
+[Download the five-second MP4 with sound](https://github.com/clark970417-eng/video-analysis/raw/refs/heads/main/examples/video-analysis-demo.mp4). The preview above is silent. Watch the playhead cross **0:02** as the highlighted frame switches from the cube on the left to the cube on the right, during the spoken line. Video Analysis transcribed the demo audio and detected the frame change. The scene uses generated imagery.
 
 For a test you can run yourself, see the [original sample clip](examples/speech-and-motion.mov), [exported frames](examples/timeline-preview.png), and [generated timeline](examples/timeline.json).
 
