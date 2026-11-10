@@ -1,0 +1,120 @@
+{
+  "timeline": [
+    {
+      "kind": "motion",
+      "start_s": 0.96,
+      "end_s": 1.0,
+      "track": "full_frame",
+      "approximate_sync": false
+    },
+    {
+      "kind": "motion",
+      "start_s": 0.96,
+      "end_s": 1.0,
+      "track": "top_left",
+      "approximate_sync": false
+    },
+    {
+      "kind": "motion",
+      "start_s": 0.96,
+      "end_s": 1.0,
+      "track": "bottom_left",
+      "approximate_sync": false
+    },
+    {
+      "kind": "speech",
+      "start_s": 1.0,
+      "end_s": 3.0,
+      "text": "The red square is moving to the right.",
+      "speaker": null,
+      "approximate_sync": false
+    },
+    {
+      "kind": "motion",
+      "start_s": 1.96,
+      "end_s": 2.0,
+      "track": "top_right",
+      "approximate_sync": false
+    },
+    {
+      "kind": "motion",
+      "start_s": 1.96,
+      "end_s": 2.0,
+      "track": "bottom_right",
+      "approximate_sync": false
+    },
+    {
+      "kind": "motion",
+      "start_s": 1.96,
+      "end_s": 2.04,
+      "track": "full_frame",
+      "approximate_sync": false
+    },
+    {
+      "kind": "motion",
+      "start_s": 2.0,
+      "end_s": 2.04,
+      "track": "top_left",
+      "approximate_sync": false
+    },
+    {
+      "kind": "motion",
+      "start_s": 2.0,
+      "end_s": 2.04,
+      "track": "bottom_left",
+      "approximate_sync": false
+    },
+    {
+      "kind": "motion",
+      "start_s": 4.0,
+      "end_s": 4.04,
+      "track": "full_frame",
+      "approximate_sync": false
+    },
+    {
+      "kind": "motion",
+      "start_s": 4.0,
+      "end_s": 4.04,
+      "track": "top_right",
+      "approximate_sync": false
+    },
+    {
+      "kind": "motion",
+      "start_s": 4.0,
+      "end_s": 4.04,
+      "track": "bottom_right",
+      "approximate_sync": false
+    }
+  ],
+  "frames": [],
+  "notes": [],
+  "track_offsets_s": {
+    "audio": 1.0,
+    "video": 0.0
+  },
+  "sync_issues": [],
+  "range_s": {
+    "start_s": 0.0,
+    "end_s": null
+  },
+  "transcript_offset_s": 1.0,
+  "audio_time_map": [
+    {
+      "transcript_s": 0.0,
+      "source_s": 1.0
+    }
+  ],
+  "search": {
+    "query": "red square",
+    "matches": [
+      {
+        "kind": "speech",
+        "start_s": 1.0,
+        "end_s": 3.0,
+        "text": "The red square is moving to the right.",
+        "speaker": null,
+        "approximate_sync": false
+      }
+    ]
+  }
+}
