@@ -6,9 +6,13 @@ Video Analysis is an Agent Skill for working with recordings. Give it a **video,
 
 Use it to summarize a podcast from its audio, jump to a phrase in an interview, or see which steps a presenter shows while explaining a tutorial. It runs in Codex, Claude Code, Google Antigravity, and HKUDS DeepCode. You can also run it from the terminal.
 
-![Illustration of a red cube changing position between two timestamped frames, aligned with a speech waveform.](examples/video-analysis-hero.jpg)
+### Five-second demo
 
-The image illustrates how a spoken cue lines up with a visible change. In the [five-second sample](examples/speech-and-motion.mov), the spoken line starts at about **0:01**, and the square changes position at about **0:02**. See the [actual exported frames](examples/timeline-preview.png) and [generated timeline](examples/timeline.json).
+[![Animated demo showing the spoken cue and the red cube changing position on the same timeline.](examples/video-analysis-demo.gif)](examples/video-analysis-demo.mp4)
+
+[Watch the demo with sound](examples/video-analysis-demo.mp4). The preview above is silent. Watch the playhead cross **0:02** as the highlighted frame switches from the cube on the left to the cube on the right, during the spoken line. Video Analysis transcribed the demo audio and detected the frame change. The scene uses generated imagery.
+
+For a test you can run yourself, see the [original sample clip](examples/speech-and-motion.mov), [exported frames](examples/timeline-preview.png), and [generated timeline](examples/timeline.json).
 
 ## How does it work?
 
