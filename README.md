@@ -1,25 +1,56 @@
 # Video Analysis
 
-Transcribe audio, measure motion, and see what happened on screen at the same point in a recording. Video Analysis is a single Agent Skill for **Codex, Claude Code, Google Antigravity, and HKUDS DeepCode**. It also runs directly from a terminal.
+## What is this?
 
-![Two frames from the sample clip show a red square moving from left to right while a spoken line plays.](examples/timeline-preview.png)
+Video Analysis is an Agent Skill for working with recordings. Give it a **video, an audio file, or a public media link**. It can transcribe what people say, measure what moves on screen, and put both on the original recording’s timeline.
 
-[Play the sample clip](examples/speech-and-motion.mov) or [inspect its generated timeline](examples/timeline.json). Speech starts at about 1 second. The square changes position at about 2 seconds.
+Use it to summarize a podcast from its audio, jump to a phrase in an interview, or see which steps a presenter shows while explaining a tutorial. It runs in Codex, Claude Code, Google Antigravity, and HKUDS DeepCode. You can also run it from the terminal.
 
-## Install
+![Two timestamped frames show a red square changing position during a spoken line.](examples/timeline-preview.png)
 
-Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and Git. Use a local agent session that can run commands and read the media or generated reports. On the first run, uv downloads Python and dependencies as needed, and the transcription tool downloads its speech models.
+In the [five-second sample](examples/speech-and-motion.mov), the spoken line starts at about **0:01**, and the square changes position at about **0:02**. The [example timeline](examples/timeline.json) records both events on the same clock.
 
-Clone the same repository into the location for your agent. Keep the whole directory so the agent can find the scripts and references next to `SKILL.md`.
+## How does it work?
 
-| Agent | Install folder | How to invoke |
-| --- | --- | --- |
-| Codex | `~/.codex/skills/analyze-video` | Mention `$analyze-video` in your prompt |
-| Claude Code | `~/.claude/skills/analyze-video` | Type `/analyze-video` |
-| Google Antigravity App, CLI, or IDE | `~/.gemini/config/skills/analyze-video` or `.agents/skills/analyze-video` in your workspace | Type `/analyze-video` in the App or CLI, or ask for the skill by name |
-| HKUDS DeepCode | `~/.agents/skills/analyze-video` or `.agents/skills/analyze-video` in your project | Select or mention `$analyze-video` |
+1. **Open the recording.** The skill reads a local file or downloads a supported public link. If you ask for a time range, it analyzes that section and keeps the original timestamps.
+2. **Listen to the audio.** It transcribes speech directly from the recording, so YouTube captions are optional. It keeps the original language, marks unclear passages when detected, and can search for a spoken phrase or export subtitles.
+3. **Inspect the video.** It measures motion and visual changes from the video frames. If you ask what is on screen, it exports timestamped stills so your agent can inspect objects, interface changes, or visible text.
+4. **Line up speech and motion.** It accounts for different audio and video start times and maps speech across known audio gaps. When a cue spans a timestamp issue, the timeline can mark its timing as approximate.
 
-Run the line for your agent:
+### Try asking
+
+- **Audio:** “Summarize this podcast from its audio and give me timestamps for the main points.”
+- **Video:** “Watch this Illustrator tutorial through the end. Explain the finishing steps and show what changes on screen.”
+- **Audio and video together:** “Find the first time they say ‘pricing’ and show me what’s on screen at that moment.”
+- **Captions:** “Transcribe 12:30 to 14:00 in the original language and export SRT and WebVTT.”
+
+## What does it support?
+
+| Input | What you can get |
+| --- | --- |
+| Audio-only recordings, podcasts, and interviews | Timestamped speech, phrase matches, and SRT or WebVTT subtitles. |
+| Silent video and screen recordings | Motion measurements and optional still frames for visual review. |
+| Video with sound, including tutorials and presentations | A shared timeline of speech and motion, with optional frames around selected moments. |
+| Public media links | Direct media links and supported video or audio pages. Supported YouTube and Vimeo links can include clickable jump times. |
+| Local files and attachments | Audio or video files the agent can access on the machine where it runs. |
+
+Public links must be downloadable. For sign-in or protected media, use an accessible local copy. A time range limits the analysis, though some sites still require downloading the full recording. Phrase search matches wording within individual speech segments. For a broader question, ask your agent to review the transcript and relevant frames together.
+
+### Output files
+
+| File | Contents |
+| --- | --- |
+| `timeline.json` | Aligned events, phrase matches, frame timestamps, timestamp issues, and jump links when available. |
+| `transcript.txt` | Speech transcribed from the audio. |
+| `motion.json` | Motion measurements for the full frame and its regions. |
+| `subtitles.srt` and `subtitles.vtt` | Captions on the original source clock. |
+| `frame-*.png` | Still frames exported on request. |
+
+## How do I install it?
+
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and Git. Use a local agent session that can run commands and read the recording or generated files. The first run may download Python, dependencies, and speech model weights.
+
+Clone the repository into your agent’s skill folder. Keep the whole directory so the agent can find the scripts next to `SKILL.md`. Run **one** of these commands:
 
 ```sh
 # Codex
@@ -35,22 +66,18 @@ git clone https://github.com/clark970417-eng/video-analysis.git ~/.gemini/config
 git clone https://github.com/clark970417-eng/video-analysis.git ~/.agents/skills/analyze-video
 ```
 
-For a workspace install in Antigravity or DeepCode, run the clone command from your project root and replace the destination with `.agents/skills/analyze-video`. Open a new agent session after installing if the skill does not appear. If automatic discovery is unavailable, ask the agent to read the installed `SKILL.md` and run its bundled command.
+| Agent | How to start |
+| --- | --- |
+| Codex | Mention `$analyze-video` in your prompt. |
+| Claude Code | Type `/analyze-video` and give it a link or file. |
+| Google Antigravity | Type `/analyze-video` in the App or CLI, or ask for the skill by name in the IDE. |
+| HKUDS DeepCode | Mention `$analyze-video` or select it with `/skill analyze-video`. |
 
-The installation locations come from the [Claude Code skills guide](https://code.claude.com/docs/en/skills), the [Antigravity skills guide](https://antigravity.google/docs/skills), and the [HKUDS DeepCode repository](https://github.com/HKUDS/DeepCode).
+For a project-only install in Antigravity or DeepCode, clone into `.agents/skills/analyze-video` from your project root. Open a new agent session if the skill does not appear. See the official [Claude Code](https://code.claude.com/docs/en/skills), [Antigravity](https://antigravity.google/docs/skills), and [DeepCode](https://github.com/HKUDS/DeepCode/blob/main/docs/guide/skills-and-memory.md) guides.
 
-## Ask your agent
+### Run without an agent
 
-- **Summarize a recording.** “Use the analyze-video skill to summarize this video from its audio. Give me timestamps for the main points.”
-- **Watch a specific section.** “Analyze 12:30 to 14:00 of this link. Explain what changes on screen while the presenter is talking.”
-- **Find a spoken line.** “Find the first time they say ‘pricing,’ show me what’s on screen, and give me a link to that moment.”
-- **Export captions.** “Transcribe this recording in its original language and export both SRT and WebVTT.”
-
-Paste a public video or audio link, attach the media, or provide a local path the agent can read. To describe objects, interface changes, or visible text, the agent can inspect timestamped frames alongside the speech and motion reports.
-
-## Run from the terminal
-
-From the installed skill directory, try the included five-second sample:
+From the installed skill directory, try the sample:
 
 ```sh
 uv run --script scripts/analyze_media.py --output ./sample-analysis \
@@ -58,35 +85,6 @@ uv run --script scripts/analyze_media.py --output ./sample-analysis \
   -- examples/speech-and-motion.mov
 ```
 
-Use a fresh output directory for each run. Replace the sample path with a quoted media link or local path.
+Use a new output directory for each run. Replace the sample path with a quoted media link or local file path. Use `--start 12:30 --end 14:00` for a section, `--visual` for representative frames, or `--help` for the full option list.
 
-| Option | What it does |
-| --- | --- |
-| `--start 12:30 --end 14:00` | Analyze a section. Times in the combined timeline still refer to the original source. |
-| `--language ja` | Tell the transcriber the language if you know it. |
-| `--find "red square"` | Return chronological matches for a phrase within individual speech segments. |
-| `--match-limit 4` | Limit the number of returned matches. |
-| `--visual` | Export representative frames, or frames near matches when you use `--find`. |
-| `--frame-at 00:02.2` | Export the first available frame at or after this time. Repeat for up to eight times. |
-
-## What you get
-
-| File | What it contains |
-| --- | --- |
-| `timeline.json` | Aligned speech and motion events, phrase matches, exported frame timestamps, timestamp issues, and jump links for supported YouTube and Vimeo URLs. |
-| `transcript.txt` | Speech as recognized from the audio, with unclear passages marked when detected. |
-| `motion.json` | Motion measurements for the full frame and its regions. |
-| `subtitles.srt` and `subtitles.vtt` | Captions on the original source clock. |
-| `frame-*.png` | Still frames for visual review when requested. |
-
-The speech pass transcribes the recording’s audio locally. Motion measurements describe pixel changes and movement. The agent can use the optional still frames to identify objects or read visible text. The timeline accounts for known audio gaps and marks cues that span a gap as approximate.
-
-Public links must be downloadable. Sign-in or protected media may require a local file, and selecting a time range can still require downloading the full source. The first run needs network access for dependencies and model weights. The sample uses a synthetic voice generated with [eSpeak NG](https://github.com/espeak-ng/espeak-ng).
-
-## Test the skill
-
-```sh
-uv run --script tests/smoke.py
-```
-
-The smoke test checks transcription, motion, the sample’s one-second audio offset, time ranges, phrase search, frame export, subtitle files, jump-link formatting, and timestamp mapping across gaps.
+To test the bundled workflow, run `uv run --script tests/smoke.py`. The test covers transcription, motion, time ranges, search, frame export, subtitles, jump-link formatting, and audio-gap alignment. The sample voice was generated with [eSpeak NG](https://github.com/espeak-ng/espeak-ng).
