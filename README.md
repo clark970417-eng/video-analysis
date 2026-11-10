@@ -115,3 +115,7 @@ uv run --script scripts/analyze_media.py --output ./sample-analysis \
 Use a new output directory for each run. Replace the sample path with a quoted media link or local file path. Use `--start 12:30 --end 14:00` for a section, `--visual` for representative frames, or `--help` for the full option list.
 
 To test the bundled workflow, run `uv run --script tests/smoke.py`. The test covers transcription, motion, time ranges, search, frame export, subtitles, jump-link formatting, and audio-gap alignment. The sample voice was generated with [eSpeak NG](https://github.com/espeak-ng/espeak-ng).
+
+## License
+
+[MIT](LICENSE)
